@@ -9,7 +9,7 @@ public:
         }
         if(nums.size()<0 || idx<0 ||flag)
         {
-           return;
+            return;
         }
         int diff = batch1-batch2;
         if(offset+diff >= memo[0].size() || offset+diff<0)return;

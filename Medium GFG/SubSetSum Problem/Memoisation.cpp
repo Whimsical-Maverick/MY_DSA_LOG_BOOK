@@ -1,44 +1,25 @@
 class Solution {
   public:
-    void Solve(bool&flag,int idx,int t_sum,vector<int>&arr,int&sum,vector<vector<int>>& memo)
+    bool Solve(int idx,vector<int>&arr,int target,vector<vector<int>>&dp)
     {
-      if(t_sum==sum)
-      {
-          flag=1;
-          return;
-      }
-      if(t_sum>sum || idx<0 || flag)
-      {
-          return ;
-      }
-       if(memo[idx][t_sum]!=-1)
+       if(target==0) return true;
+       if(idx==0)
        {
-           if(memo[idx][t_sum]==1) flag=1;
-           return;
+           return (target==arr[0]);
        }
-       int sum1=t_sum;
-       int sum2=t_sum;
-       sum1+=arr[idx];
-       Solve(flag,idx-1,sum1,arr,sum,memo);
-       Solve(flag,idx-1,sum2,arr,sum,memo);
-       if(flag==1) memo[idx][t_sum]=1;
-       else memo[idx][t_sum]=0;
-       return;
+       if(dp[idx][target]!=-1)return dp[idx][target];
+       bool take=false;
+       if(target>=arr[idx]) 
+       {
+           take = Solve(idx-1,arr,target-arr[idx],dp);
+       }
+       bool not_take = Solve(idx-1,arr,target,dp);
+       return dp[idx][target]=(take||not_take);
     }
     bool isSubsetSum(vector<int>& arr, int sum) 
     {
-     vector<vector<int>>memo(arr.size(),vector<int>(sum+1,-1));
-     int  t_sum=0;
-     bool flag =0;
+     vector<vector<int>>dp(arr.size(),vector<int>(sum+1,-1));
      int idx=arr.size()-1;
-     Solve(flag, idx, t_sum, arr, sum,memo);
-     if(flag)
-     {
-         return true;
-     }
-     else
-     {
-         return false;
-     }
+     return Solve(idx,arr, sum,dp);
     }
 };
