@@ -3,7 +3,7 @@ public:
     vector<int> zeroOneBFS(int V, vector<vector<pair<int,int>>> &adj, int src)
     {
         deque<int> dq;
-        // vector<int> dist(V, INT_MAX);
+        vector<int> dist(V, INT_MAX);
         
         dist[src] = 0;
         dq.push_front(src);
