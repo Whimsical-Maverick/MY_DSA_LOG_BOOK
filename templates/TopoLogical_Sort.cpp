@@ -31,7 +31,7 @@ private:
     }
 public:
     // V vertices (0..V-1), adjacency list adj
-    bool isCycle(int V, vector<vector<int>>& adj)
+    vector<int> isCycle(int V, vector<vector<int>>& adj)
     {
         vector<bool> vis(V, false);
         stack<int>st;
